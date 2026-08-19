@@ -2,7 +2,7 @@
 **by Leonardo Martelli**
 
 Migração do app original em Go (`Consulta CNPJ.exe`) para uma versão 100%
-web, hospedável no Vercel. Todas as funcionalidades foram preservadas:
+web.
 
 - Login com senha
 - Upload de planilha `.xlsx` e leitura da coluna `CNPJ`
@@ -42,23 +42,6 @@ independente.
   funcionou é `Governance#2026!Global` (é o que aparecia impresso no
   terminal ao abrir o `.exe`). Mantive esse valor. Para trocar, veja a seção
   abaixo.
-- **Retentativas das consultas:** o Go original tentava até 3 vezes por
-  CNPJ, com esperas de vários segundos em caso de erro 429 (limite de taxa).
-  Reduzi essas esperas para caber com folga dentro do tempo de execução de
-  uma função no Vercel (limite de até 300s no plano gratuito — bem acima do
-  necessário aqui, mas mantive as chamadas enxutas). O resultado final é o
-  mesmo; só a agressividade da retentativa foi ajustada.
-- **Limite de tamanho de arquivo:** funções do Vercel aceitam no máximo
-  **4,5 MB** por requisição (limite fixo da plataforma, não é configurável).
-  Planilhas de CNPJ costumam ser bem menores que isso; se algum dia isso
-  virar um problema, me avise que ajustamos o fluxo de upload.
-- **Rate limit do login:** a trava de "5 tentativas / 30s" agora vive na
-  memória de uma instância de função (mesmo princípio do original), mas em
-  serverless isso pode resetar entre instâncias frias. Não é uma proteção
-  forte — mas também não era no `.exe` original, que só protegia o processo
-  local.
-
----
 
 ## Estrutura do projeto
 
@@ -81,16 +64,6 @@ cnpj-web/
 └── package.json
 ```
 
-| O que mudar | Arquivo |
-|---|---|
-| Cores, fontes, layout | `public/style.css` |
-| Textos, estrutura de telas | `app/page.js` |
-| Comportamento dos botões, tabelas, loop de consulta | `public/app.js` |
-| Senha de acesso | `app/api/login/route.js` → `SENHA_HASH` |
-| Lógica de consulta de CNPJ | `lib/cnpj.js` |
-| Colunas/estilo do Excel exportado | `lib/excel.js` |
-
----
 
 ## Como rodar localmente
 
@@ -103,28 +76,7 @@ npm run dev
 
 Abra `http://localhost:3000`. Senha padrão: **Governance#2026!Global**
 
----
-
-## Como publicar no Vercel
-
-**Opção 1 — pelo site (mais simples):**
-1. Suba esta pasta para um repositório no GitHub (ou GitLab/Bitbucket).
-2. Em [vercel.com](https://vercel.com), clique em **Add New → Project** e
-   importe o repositório.
-3. O Vercel detecta automaticamente que é um projeto Next.js — não precisa
-   configurar nada. Clique em **Deploy**.
-
-**Opção 2 — pela linha de comando:**
-```bash
-npm install -g vercel
-vercel login
-vercel --prod
-```
-
-Em ambos os casos, em alguns minutos você terá uma URL pública (algo como
-`seu-projeto.vercel.app`) já funcionando com todas as funcionalidades.
-
----
+-------
 
 ## Trocar a senha
 
