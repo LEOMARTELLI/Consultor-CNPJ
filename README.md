@@ -35,13 +35,6 @@ app original: antes só uma consulta podia rodar por vez, para *todo mundo*
 que usasse o servidor; agora cada pessoa tem sua própria consulta
 independente.
 
-### Outras adaptações
-
-- **Senha de acesso:** o hash no código Go original não correspondia à senha
-  documentada no README (`cnpj2025`) — na prática, a senha que sempre
-  funcionou é `Governance#2026!Global` (é o que aparecia impresso no
-  terminal ao abrir o `.exe`). Mantive esse valor. Para trocar, veja a seção
-  abaixo.
 
 ## Estrutura do projeto
 
