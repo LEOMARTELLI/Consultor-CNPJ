@@ -1,0 +1,515 @@
+/* ── Variáveis de tema ──────────────────────────────────────────────────────── */
+:root {
+  --bg: #0F172A;
+  --sur: #1E293B;
+  --bor: #334155;
+  --acc: #3B82F6;
+  --ac2: #A78BFA;
+  --ok: #22C55E;
+  --er: #EF4444;
+  --wa: #F59E0B;
+  --tx: #F8FAFC;
+  --td: #94A3B8;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TELA DE LOGIN ──────────────────────────────────────────────────────────── */
+#lov {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.lc {
+  background: var(--sur);
+  border: 1px solid var(--bor);
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 380px;
+  text-align: center;
+}
+
+.lc .ico {
+  font-size: 52px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.lc h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.lc>p {
+  color: var(--td);
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+
+.lc label {
+  display: block;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--td);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.lc input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--bor);
+  background: var(--bg);
+  color: var(--tx);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.lc input:focus {
+  border-color: var(--acc);
+}
+
+.lc input.er {
+  border-color: var(--er);
+}
+
+#ler {
+  color: var(--er);
+  font-size: 12px;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+.lb {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  background: var(--acc);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lb:hover {
+  background: #2563EB;
+}
+
+.lb:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── APP ────────────────────────────────────────────────────────────────────── */
+#app {
+  display: none;
+  flex: 1;
+  overflow: hidden;
+}
+
+.lay {
+  display: flex;
+  height: 100vh;
+}
+
+/* ── SIDEBAR ────────────────────────────────────────────────────────────────── */
+.sb {
+  width: 280px;
+  min-width: 280px;
+  background: var(--sur);
+  border-right: 1px solid var(--bor);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+.sbl {
+  padding: 22px 20px 14px;
+}
+
+.ico-sb {
+  font-size: 32px;
+  display: block;
+}
+
+.sbl h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 8px 0 2px;
+}
+
+.sbl p {
+  font-size: 12px;
+  color: var(--td);
+}
+
+.dv {
+  height: 1px;
+  background: var(--bor);
+  margin: 0 20px;
+}
+
+/* Labels de seção */
+.sl {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--td);
+  letter-spacing: 0.1em;
+  padding: 12px 20px 6px;
+}
+
+/* Botões de módulo */
+.mb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 20px 6px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tx);
+  background: var(--bor);
+  width: calc(100% - 40px);
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.mb.ac {
+  background: var(--acc);
+}
+
+.mb.as {
+  background: var(--ac2);
+}
+
+/* Área de ações */
+.aa {
+  padding: 8px 20px 0;
+}
+
+/* Botões gerais */
+.btn {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+  transition: opacity 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bi {
+  background: var(--acc);
+}
+
+.bs {
+  background: var(--ac2);
+}
+
+.bp {
+  background: #450A0A;
+  color: #FECACA;
+}
+
+.be {
+  background: #064E3B;
+  color: #D1FAE5;
+}
+
+.ba {
+  background: var(--bor);
+}
+
+.bt {
+  background: var(--bor);
+  color: var(--tx);
+}
+
+/* Label do arquivo */
+.al {
+  font-size: 11px;
+  color: var(--td);
+  padding: 4px 20px 0;
+  word-break: break-all;
+}
+
+/* Cards de info */
+.ic {
+  margin: 8px 20px;
+  background: #1E293B;
+  border: 1px solid var(--bor);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.ic .it {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--td);
+  margin-bottom: 4px;
+}
+
+.ic .iv {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--acc);
+}
+
+/* Cards de estatísticas */
+.sc {
+  margin: 0 20px 12px;
+  background: #1E293B;
+  border: 1px solid var(--bor);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.sr {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 12px;
+}
+
+.sr span:first-child {
+  color: var(--td);
+}
+
+.so {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.se {
+  color: var(--er);
+  font-weight: 700;
+}
+
+.si {
+  color: var(--wa);
+  font-weight: 700;
+}
+
+.st {
+  color: var(--tx);
+  font-weight: 700;
+}
+
+/* ── ÁREA PRINCIPAL ─────────────────────────────────────────────────────────── */
+.mn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Barra de progresso */
+.pa {
+  background: var(--sur);
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--bor);
+}
+
+.pt {
+  background: var(--bor);
+  border-radius: 4px;
+  height: 8px;
+  overflow: hidden;
+}
+
+.pf {
+  background: var(--acc);
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s;
+  border-radius: 4px;
+}
+
+.pi {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--td);
+}
+
+.pc {
+  color: var(--acc);
+  font-weight: 700;
+}
+
+/* Wrapper da tabela */
+.tw {
+  flex: 1;
+  overflow: auto;
+  padding: 16px;
+}
+
+.tc {
+  background: var(--sur);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+thead th {
+  background: #1E293B;
+  color: var(--tx);
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--bor);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--bor);
+}
+
+tbody tr:hover {
+  filter: brightness(1.1);
+}
+
+tbody td {
+  padding: 8px 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 220px;
+  text-overflow: ellipsis;
+}
+
+/* Status nas células */
+.tok {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+.ter {
+  color: var(--er);
+  font-weight: 700;
+}
+
+.tin {
+  color: var(--wa);
+  font-weight: 700;
+}
+
+/* Cores de linhas por status */
+.rok {
+  background: #0F2A1A;
+}
+
+.roa {
+  background: #0A1F13;
+}
+
+.rer {
+  background: #2A0A0A;
+}
+
+.rin {
+  background: #2A1A00;
+}
+
+/* Mensagem de vazio */
+.em {
+  text-align: center;
+  color: var(--td);
+  padding: 60px 20px;
+  font-size: 14px;
+}
+
+/* ── MODO CLARO ─────────────────────────────────────────────────────────────── */
+body.lt {
+  --bg: #F8FAFC;
+  --sur: #FFFFFF;
+  --bor: #CBD5E1;
+  --tx: #0F172A;
+  --td: #64748B;
+  --acc: #2563EB;
+  --ac2: #7C3AED;
+  --ok: #15803D;
+  --er: #B91C1C;
+  --wa: #A16207;
+}
+
+body.lt .ic {
+  background: #F1F5F9;
+}
+
+body.lt .sc {
+  background: #F1F5F9;
+}
+
+body.lt .rok {
+  background: #F0FDF4;
+}
+
+body.lt .roa {
+  background: #DCFCE7;
+}
+
+body.lt .rer {
+  background: #FEF2F2;
+}
+
+body.lt .rin {
+  background: #FFFBEB;
+}
+
+body.lt thead th {
+  background: #E2E8F0;
+}
