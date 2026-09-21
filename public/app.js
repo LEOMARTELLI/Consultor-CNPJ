@@ -190,12 +190,21 @@ async function iniciar(tipo) {
     }
   }
 
+
   if (tipo === 'cadastral') {
+=======
+  rodando = false;
+
+  if (tipo === 'cadastral') {
+    document.getElementById('bic').disabled = false;
+    document.getElementById('bpc').disabled = true;
+>>>>>>> 6af35ad0a46c473ae7107eab333b7d65cbb6864e
     if (resultadosCad.length) document.getElementById('bec').disabled = false;
   } else {
     document.getElementById('bis').disabled = false;
     document.getElementById('bps').disabled = true;
     if (resultadosSim.length) document.getElementById('bes').disabled = false;
+    
     rodando = false;
   }
 
@@ -291,6 +300,14 @@ async function buscarEmailsFaltantes(totalProcessados) {
     setStatus('\u23F9 Cancelado durante a busca de e-mails. ' + feitos + '/' + totalEmails + ' e-mails processados.');
   } else {
     setStatus('\u2705 Concluido! ' + totalProcessados + '/' + cnpjs.length + ' processados \u2014 e-mails: ' + feitos + '/' + totalEmails + '.');
+=======
+  }
+
+  if (!cancelando) {
+    setStatus('\u2705 Concluido! ' + atual + '/' + cnpjs.length + ' processados.');
+  } else {
+    setStatus('\u23F9 Cancelado. ' + atual + ' processados.');
+>>>>>>> 6af35ad0a46c473ae7107eab333b7d65cbb6864e
   }
 }
 
