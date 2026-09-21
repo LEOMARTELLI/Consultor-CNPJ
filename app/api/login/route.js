@@ -3,11 +3,11 @@ import { createHash } from "crypto";
 export const runtime = "nodejs";
 
 // senhaHash é o SHA-256 da senha de acesso.
-// Senha atual: "Governance#2026!Global" (é o valor que de fato bate com o
+// Senha atual: "" (é o valor que de fato bate com o
 // hash gravado no backend Go original — o README dizia "cnpj2025", mas
 // esse valor nunca correspondeu ao hash em uso).
 // Para trocar: node -e "console.log(require('crypto').createHash('sha256').update('NOVA_SENHA').digest('hex'))"
-const SENHA_HASH = "564cac9a9177edc490a87b69f59826d0819088bc1e8750c1d33a0c60d97453ab";
+const SENHA_HASH = "80d4621531777b789127bcfb9937b2d56fa1e1757342672fa6c88825c040d7c3";
 
 // Estado de rate-limit em memória por instância (best-effort).
 // Em serverless isso reseta em cold starts / instâncias diferentes — não é
