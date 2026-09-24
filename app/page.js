@@ -2,13 +2,12 @@
 
 import { useEffect } from "react";
 
-// Mesmo HTML de frontend/index.html (só o conteúdo do <body>), preservado
-// tal como estava — nenhuma tela, id ou texto foi alterado.
 const BODY_HTML = `
   <!-- ── LOGIN ─────────────────────────────────────────────────────────────── -->
   <div id="lov">
-    <div class="lc">
-      <div class="ico">&#128202;</div>
+    <div id="vanta-bg" style="position:absolute;inset:0;z-index:0;"></div>
+    <div class="lc" style="position:relative;z-index:1;">
+      <img class="ico" src="/login-icon.jpg" alt="Ícone de automação e segurança" />
       <h1>Automação - CNPJ</h1>
       <p>by: Leonardo Martelli</p>
       <label for="si">SENHA DE ACESSO</label>
@@ -25,7 +24,7 @@ const BODY_HTML = `
       <!-- SIDEBAR -->
       <div class="sb">
         <div class="sbl">
-          <div class="ico-sb">&#128202;</div>
+          <img class="ico-sb" src="/login-icon.jpg" alt="Ícone de automação e segurança" />
           <h2>Automação - CNPJ</h2>
           <p>Consultor de CNPJ</p>
         </div>
@@ -160,18 +159,71 @@ const BODY_HTML = `
   <input type="file" id="fi" accept=".xlsx,.xls" style="display:none" onchange="uploadArquivo(this)">
 `;
 
+function carregarScript(src) {
+  return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
 export default function Home() {
   useEffect(() => {
-    // Evita duplicar o script (o modo de desenvolvimento do React
-    // pode montar o efeito duas vezes).
-    if (document.querySelector('script[src="/app.js"]')) return;
+    // ── App.js principal ────────────────────────────────────────────────────
+    if (!document.querySelector('script[src="/app.js"]')) {
+      const script = document.createElement("script");
+      script.src = "/app.js";
+      script.async = false;
+      document.body.appendChild(script);
+    }
 
-    const script = document.createElement("script");
-    script.src = "/app.js";
-    script.async = false;
-    document.body.appendChild(script);
+    // ── Vanta Birds na tela de login ────────────────────────────────────────
+    let vantaEffect = null;
+
+    async function initVanta() {
+      try {
+        // Three.js é dependência obrigatória do Vanta
+        await carregarScript("https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js");
+        await carregarScript("https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js");
+
+        const el = document.getElementById("vanta-bg");
+        if (!el || !window.VANTA) return;
+
+        vantaEffect = window.VANTA.BIRDS({
+          el,
+          mouseControls:  true,
+          touchControls:  true,
+          gyroControls:   false,
+          minHeight:       200,
+          minWidth:        200,
+          scale:           1.0,
+          scaleMobile:     1.0,
+          // Cores do print (convertidas de hex 0x para #)
+          backgroundColor: 0x69428c,   // roxo escuro
+          color1:          0x1e161a,   // quase preto
+          color2:          0xe36914,   // laranja
+          colorMode:       "variance",
+          quantity:        5,
+          birdSize:        1,
+          wingSpan:        30,
+          speedLimit:      5,
+          separation:      20,
+          alignment:       20,
+          cohesion:        20,
+        });
+      } catch (e) {
+        // Falha silenciosa — tela de login aparece normalmente sem o efeito
+        console.warn("Vanta Birds não carregou:", e);
+      }
+    }
+
+    initVanta();
+
     return () => {
-      script.remove();
+      if (vantaEffect) vantaEffect.destroy();
     };
   }, []);
 

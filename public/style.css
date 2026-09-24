@@ -51,9 +51,15 @@ body {
 }
 
 .lc .ico {
-  font-size: 52px;
+  width: 104px;
+  height: 104px;
   margin-bottom: 12px;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 18px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .lc h1 {
@@ -157,8 +163,12 @@ body {
 }
 
 .ico-sb {
-  font-size: 32px;
+  width: 64px;
+  height: 64px;
   display: block;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .sbl h2 {
