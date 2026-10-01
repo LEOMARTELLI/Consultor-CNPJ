@@ -202,7 +202,7 @@ export default function Home() {
           scale:           1.0,
           scaleMobile:     1.0,
           // Cores do print (convertidas de hex 0x para #)
-          backgroundColor: 0x69428c,   // roxo escuro
+          backgroundColor: 0xfff7ed,
           color1:          0x1e161a,   // quase preto
           color2:          0xe36914,   // laranja
           colorMode:       "variance",
